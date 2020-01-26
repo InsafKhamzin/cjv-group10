@@ -15,10 +15,9 @@ public class HrManagement {
         	System.out.println("Please type password:");
         	String pass = sc.next();
         	
-        	DaManager daManager = new DaManager();
-        	daManager.verifyEmployee(user, pass);
+        	DaManager.verifyEmployee(user, pass);
         	
-            
+            System.out.println(DaManager.getEmployeeById(202).getFirstName());
         }
         catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());

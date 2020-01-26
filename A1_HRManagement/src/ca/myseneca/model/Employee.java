@@ -1,6 +1,6 @@
 package ca.myseneca.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Employee implements java.io.Serializable {
     private int employeeId;
