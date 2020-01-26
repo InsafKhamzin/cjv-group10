@@ -2,7 +2,7 @@ package ca.myseneca.model;
 
 import java.util.Date;
 
-public class Employee {
+public class Employee implements java.io.Serializable {
     private int employeeId;
     private String firstName;
     private String lastName;
@@ -15,6 +15,8 @@ public class Employee {
     private int managerId;
     private int departmentId;
 
+    public Employee() {}
+    
     public Employee(int employeeId, String firstName, String lastName,
                     String email, String phoneNumber, Date hireDate,
                     String jobId, float salary, float commissionPercent,

@@ -1,6 +1,7 @@
 package ca.myseneca.model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaManager {
@@ -13,7 +14,20 @@ public class DaManager {
         try {
             connection = new DbUtilities().getConnection();
 
-            //TODO
+            statement = connection.prepareCall("{? = call P_SECURITY.f_security(?,?)}");
+            statement.registerOutParameter(1, Types.INTEGER);
+            statement.setString(2, user);
+            statement.setString(3, password);
+            
+            statement.execute();
+            
+            int id = statement.getInt(1);
+            
+            if(id == 0) {
+            	System.out.println("Unauthorized User");
+            	System.exit(1);
+            }
+            
 
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
@@ -60,6 +74,22 @@ public class DaManager {
         }
     }
 
+    public static int getEmployeeID(String user, String password) {
+    
+    	return 1;
+    }
+    
+    public static ArrayList<Employee> getAllEmployees() {
+    
+    	return null;
+    }
+    
+    public static ArrayList<Employee> getEmployeesByDepartmentID (int depid) {
+    	
+    	return null;
+    }
+    
+    
     public static Employee getEmployeeById(int employeeId){
         Connection connection = null;
         CallableStatement statement = null;
@@ -174,4 +204,5 @@ public class DaManager {
         return false;
     }
 
+    
 }
