@@ -73,6 +73,7 @@ public class DaManager {
             
             statement.executeUpdate();
             
+            System.out.println("Employee Added");
 
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
@@ -160,8 +161,54 @@ public class DaManager {
     
     public static ArrayList<Employee> getEmployeesByDepartmentID (int depid) {
     	
-    	
-    	return null;
+    	Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<Employee> list = new ArrayList<>();
+        
+        try{
+            connection = new DbUtilities().getConnection();
+
+            statement = connection.createStatement();
+            
+            String query = "select * from Employees where DEPARTMENT_ID = " + depid;
+            
+            resultSet = statement.executeQuery(query);
+            
+             while(resultSet.next()) {
+            	Employee e = new Employee();
+            	 
+            	e.setEmployeeId(resultSet.getInt("EMPLOYEE_ID"));
+             	e.setFirstName(resultSet.getString("FIRST_NAME"));
+             	e.setLastName(resultSet.getString("LAST_NAME"));
+             	e.setEmail(resultSet.getString("EMAIL"));
+             	e.setPhoneNumber(resultSet.getString("PHONE_NUMBER"));
+             	e.setHireDate(resultSet.getDate("HIRE_DATE"));
+             	e.setJobId(resultSet.getString("JOB_ID"));
+             	e.setSalary(resultSet.getFloat("SALARY"));
+             	e.setCommissionPercent(resultSet.getFloat("COMMISSION_PCT"));
+             	e.setManagerId(resultSet.getInt("MANAGER_ID"));
+             	e.setDepartmentId(resultSet.getInt("DEPARTMENT_ID"));
+             	
+             	list.add(e);
+             }
+
+        } catch (SQLException ex) {
+            DbUtilities.printSQLException(ex);
+        } catch (Exception ex){
+            System.out.println("DaManager updateEmployee ex: " + ex);
+        }
+        finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+                System.out.println("Connection closed");
+            }catch (SQLException ex){
+                System.out.println("Failed to close connection");
+            }
+        }
+    	return list;
     }
     
     
@@ -216,14 +263,34 @@ public class DaManager {
 
     public static int updateEmployee(Employee employee){
         Connection connection = null;
-        CallableStatement statement = null;
+        Statement statement = null;
         ResultSet resultSet = null;
 
         try{
-            connection = new DbUtilities().getConnection();
+        	connection = new DbUtilities().getConnection();
 
-            //TODO
+        	statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 
+			String query = "select * from Employees where EMPLOYEE_ID = " + employee.getEmployeeId();
+
+			resultSet = statement.executeQuery(query);
+
+			resultSet.absolute(1);
+			resultSet.updateString(2, employee.getFirstName());
+			resultSet.updateString(3, employee.getLastName());
+			resultSet.updateString(4, employee.getEmail());
+			resultSet.updateString(5, employee.getPhoneNumber());
+			resultSet.updateDate(6, employee.getHireDate());
+			resultSet.updateString(7,employee.getJobId());
+			resultSet.updateFloat(8, employee.getSalary());
+			resultSet.updateFloat(9, employee.getCommissionPercent());
+			resultSet.updateInt(10, employee.getManagerId());
+			resultSet.updateInt(11, employee.getDepartmentId());
+			resultSet.updateRow();
+        	
+            System.out.println("Employee Updated");
+
+            
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
@@ -244,13 +311,19 @@ public class DaManager {
 
     public static int deleteEmployeeById(int employeeId){
         Connection connection = null;
-        CallableStatement statement = null;
+        Statement statement = null;
         ResultSet resultSet = null;
 
         try{
             connection = new DbUtilities().getConnection();
 
-            //TODO
+            statement = connection.createStatement();
+            
+            String query = "delete from Employees where EMPLOYEE_ID = " + employeeId;
+            
+            statement.executeUpdate(query);
+            
+            System.out.println("Employee Deleted");
 
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
@@ -271,20 +344,45 @@ public class DaManager {
         return 0;
     }
 
-    public static boolean batchUpdate(List<Employee> employees) {
+    public static boolean batchUpdate(String [] SQLs) {
         Connection connection = null;
-        CallableStatement statement = null;
+        Statement statement = null;
         ResultSet resultSet = null;
 
         try{
             connection = new DbUtilities().getConnection();
-
-            //TODO
+            
+            connection.setAutoCommit(false);
+            
+            statement = connection.createStatement();
+            
+            for(String sql : SQLs) {
+            	statement.addBatch(sql);
+            }
+            
+            int count[] = statement.executeBatch();
+            
+            for(int i=1;i<=count.length;i++){
+                System.out.println("SQL " + i + " has affected " + count[i] + " times");
+            }
+            
+            connection.commit();
+            
 
         } catch (BatchUpdateException ex) {
+        	try {
+        	connection.rollback();
+        	} catch(SQLException e) {
+        		System.err.println(e.getMessage());
+        	}
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
-            System.out.println("DaManager batchUpdate ex: " + ex);
+        	try {
+            	connection.rollback();
+            	} catch(SQLException e) {
+            		System.err.println(e.getMessage());
+            	}
+            System.err.println("DaManager batchUpdate ex: " + ex);
 
         }
         finally {
