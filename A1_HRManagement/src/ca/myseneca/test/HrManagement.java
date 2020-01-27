@@ -90,6 +90,20 @@ public class HrManagement {
                 System.out.println(emp.getInfoString());
             }
             System.out.println("------------------------------------------------------------------------");
+
+            System.out.println("Test batchUpdate. Scripts:");
+            String[] scripts = new String[]{
+                    "UPDATE Employees SET PHONE_NUMBER='123.123.123' WHERE DEPARTMENT_ID=80",
+                    "UPDATE Employees SET PHONE_NUMBER='321.321.321' WHERE DEPARTMENT_ID=90",
+                    "UPDATE Employees SET PHONE_NUMBER='111.111.111' WHERE DEPARTMENT_ID=100"
+            };
+            for(String script : scripts){
+                System.out.println(script);
+            }
+            boolean batchResult = DaManager.batchUpdate(scripts);
+            if (!batchResult) {
+                System.out.println("Failed to perform batch update");
+            }
         }
         catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());

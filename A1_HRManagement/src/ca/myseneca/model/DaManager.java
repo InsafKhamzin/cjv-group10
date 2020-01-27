@@ -380,9 +380,9 @@ public class DaManager {
             }
             
             int count[] = statement.executeBatch();
-            
-            for(int i=1;i<=count.length;i++){
-                System.out.println("SQL " + i + " has affected " + count[i] + " times");
+
+            for (int i = 0; i < count.length; i++) {
+                System.out.println("SQL " + (i + 1) + " has affected " + count[i] + " times");
             }
             
             connection.commit();
