@@ -56,8 +56,6 @@ public class DbUtilities {
         Class.forName(driver);
         Connection conn = DriverManager.getConnection(urlString,
                 this.dbProps.getProperty("DB_USERNAME"), this.dbProps.getProperty("DB_PASSWORD"));
-
-        System.out.println("Connection opened");
         return conn;
     }
 }

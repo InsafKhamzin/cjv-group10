@@ -54,7 +54,6 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
@@ -96,7 +95,6 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
@@ -153,7 +151,6 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
@@ -209,7 +206,6 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
@@ -226,7 +222,7 @@ public class DaManager {
         Connection connection = null;
         OracleCallableStatement statement = null;
         ResultSet resultSet = null;
-        Employee e = new Employee();
+        Employee e = null;
         try{
             connection = new DbUtilities().getConnection();
 
@@ -239,7 +235,8 @@ public class DaManager {
             OracleResultSet orset = (OracleResultSet) statement.getCursor(2);
            
             if(orset.next()) {
-            
+                e = new Employee();
+
             	e.setEmployeeId(orset.getInt(1));
             	e.setFirstName(orset.getString(2));
             	e.setLastName(orset.getString(3));
@@ -263,7 +260,6 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
@@ -281,6 +277,7 @@ public class DaManager {
         Statement statement = null;
         ResultSet resultSet = null;
 
+        int result = 0;
         try{
         	connection = new DbUtilities().getConnection();
 
@@ -303,9 +300,7 @@ public class DaManager {
 			resultSet.updateInt(11, employee.getDepartmentId());
 			resultSet.updateRow();
         	
-            System.out.println("Employee Updated");
-
-            
+            result = employee.getEmployeeId();
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
@@ -316,12 +311,11 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
         }
-        return 0;
+        return result;
     }
 
     /**
@@ -334,6 +328,8 @@ public class DaManager {
         Statement statement = null;
         ResultSet resultSet = null;
 
+        int result = 0;
+
         try{
             connection = new DbUtilities().getConnection();
 
@@ -342,26 +338,22 @@ public class DaManager {
             String query = "delete from Employees where EMPLOYEE_ID = " + employeeId;
             
             statement.executeUpdate(query);
-            
-            System.out.println("Employee Deleted");
-
+            result = employeeId;
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
             System.out.println("DaManager deleteEmployeeById ex: " + ex);
-
         }
         finally {
             try {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
         }
-        return 0;
+        return result;
     }
 
     /**
@@ -373,6 +365,8 @@ public class DaManager {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+
+        boolean result = false;
 
         try{
             connection = new DbUtilities().getConnection();
@@ -392,7 +386,7 @@ public class DaManager {
             }
             
             connection.commit();
-
+            result = true;
         } catch (BatchUpdateException ex) {
         	try {
         	connection.rollback();
@@ -414,11 +408,10 @@ public class DaManager {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
                 if (connection != null) connection.close();
-                System.out.println("Connection closed");
             }catch (SQLException ex){
                 System.out.println("Failed to close connection");
             }
         }
-        return false;
+        return result;
     }
 }

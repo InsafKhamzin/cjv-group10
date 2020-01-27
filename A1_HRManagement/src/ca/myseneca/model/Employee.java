@@ -124,4 +124,12 @@ public class Employee implements java.io.Serializable {
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
+
+    public String getInfoString(){
+        return String.format("Id: %d, First name: %s, Last name: %s,\n" +
+                "Email: %s, Phone number: %s, Hire date: %s,\n" +
+                "Job id: %s, Salary: %.2f, Commission: %.2f, Manager id: %d, Department id: %d",
+                employeeId, firstName, lastName, email, phoneNumber, hireDate, jobId, salary,
+                commissionPercent, managerId, departmentId);
+    }
 }
