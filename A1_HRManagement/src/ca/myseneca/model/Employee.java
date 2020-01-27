@@ -126,9 +126,9 @@ public class Employee implements java.io.Serializable {
     }
 
     public String getInfoString(){
-        return String.format("Id: %d, First name: %s, Last name: %s,\n" +
-                "Email: %s, Phone number: %s, Hire date: %s,\n" +
-                "Job id: %s, Salary: %.2f, Commission: %.2f, Manager id: %d, Department id: %d",
+        return String.format("Id: %d, First name: %s, Last name: %s, Email: %s,\n" +
+                "Phone number: %s, Hire date: %s, Job id: %s,\n" +
+                "Salary: %.2f, Commission: %.2f, Manager id: %d, Department id: %d",
                 employeeId, firstName, lastName, email, phoneNumber, hireDate, jobId, salary,
                 commissionPercent, managerId, departmentId);
     }

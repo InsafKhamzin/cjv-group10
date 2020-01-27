@@ -16,10 +16,12 @@ public class DaManager {
      * Add employee
      * @param employee - employee object
      */
-    public static void addEmployee(Employee employee) {
+    public static boolean addEmployee(Employee employee) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+
+        boolean result = false;
 
         try{
             connection = new DbUtilities().getConnection();
@@ -41,9 +43,7 @@ public class DaManager {
             statement.setInt(11, employee.getDepartmentId());
             
             statement.executeUpdate();
-            
-            System.out.println("Employee Added");
-
+            result = true;
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
@@ -58,6 +58,7 @@ public class DaManager {
                 System.out.println("Failed to close connection");
             }
         }
+        return result;
     }
 
     /**
@@ -272,35 +273,36 @@ public class DaManager {
      * @param employee employee object
      * @return
      */
-    public static int updateEmployee(Employee employee){
+    public static boolean updateEmployee(Employee employee){
         Connection connection = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        int result = 0;
+        boolean result = false;
         try{
         	connection = new DbUtilities().getConnection();
 
-        	statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        	statement = connection.prepareStatement( "select first_name, last_name, email, phone_number, " +
+                            "hire_date, job_id, salary, commission_pct, manager_id, department_id from Employees where EMPLOYEE_ID = ?",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	statement.setInt(1, employee.getEmployeeId());
 
-			String query = "select * from Employees where EMPLOYEE_ID = " + employee.getEmployeeId();
+			resultSet = statement.executeQuery();
 
-			resultSet = statement.executeQuery(query);
-
-			resultSet.absolute(1);
-			resultSet.updateString(2, employee.getFirstName());
-			resultSet.updateString(3, employee.getLastName());
-			resultSet.updateString(4, employee.getEmail());
-			resultSet.updateString(5, employee.getPhoneNumber());
-			resultSet.updateDate(6, employee.getHireDate());
-			resultSet.updateString(7,employee.getJobId());
-			resultSet.updateFloat(8, employee.getSalary());
-			resultSet.updateFloat(9, employee.getCommissionPercent());
-			resultSet.updateInt(10, employee.getManagerId());
-			resultSet.updateInt(11, employee.getDepartmentId());
+			resultSet.first();
+			resultSet.updateString(1, employee.getFirstName());
+			resultSet.updateString(2, employee.getLastName());
+			resultSet.updateString(3, employee.getEmail());
+			resultSet.updateString(4, employee.getPhoneNumber());
+			resultSet.updateDate(5, employee.getHireDate());
+			resultSet.updateString(6,employee.getJobId());
+			resultSet.updateFloat(7, employee.getSalary());
+			resultSet.updateFloat(8, employee.getCommissionPercent());
+			resultSet.updateInt(9, employee.getManagerId());
+			resultSet.updateInt(10, employee.getDepartmentId());
 			resultSet.updateRow();
         	
-            result = employee.getEmployeeId();
+            result = true;
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
@@ -323,22 +325,20 @@ public class DaManager {
      * @param employeeId - employee id
      * @return
      */
-    public static int deleteEmployeeById(int employeeId){
+    public static boolean deleteEmployeeById(int employeeId){
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
 
-        int result = 0;
+        boolean result = false;
 
         try{
             connection = new DbUtilities().getConnection();
-
             statement = connection.createStatement();
-            
             String query = "delete from Employees where EMPLOYEE_ID = " + employeeId;
             
             statement.executeUpdate(query);
-            result = employeeId;
+            result = true;
         } catch (SQLException ex) {
             DbUtilities.printSQLException(ex);
         } catch (Exception ex){
