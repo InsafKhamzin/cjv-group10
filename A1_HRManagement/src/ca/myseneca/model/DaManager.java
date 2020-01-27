@@ -2,51 +2,20 @@ package ca.myseneca.model;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * DaManger is data access layer for the application
+ */
 public class DaManager {
 
-    public static int verifyEmployee(String user, String password) {
-        Connection connection = null;
-        CallableStatement statement = null;
-        ResultSet resultSet = null;
-        int id = 0;
-        
-        try {
-            connection = new DbUtilities().getConnection();
-
-            statement = connection.prepareCall("{? = call P_SECURITY.f_security(?,?)}");
-            statement.registerOutParameter(1, Types.INTEGER);
-            statement.setString(2, user);
-            statement.setString(3, password);
-            
-            statement.execute();
-            
-            id = statement.getInt(1);
-            
-
-        } catch (SQLException ex) {
-            DbUtilities.printSQLException(ex);
-        } catch (Exception ex){
-            System.out.println("DaManager addEmployee ex: " + ex);
-        }
-        finally {
-            try {
-                if (resultSet != null) resultSet.close();
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-                System.out.println("Connection closed");
-            }catch (SQLException ex){
-                System.out.println("Failed to close connection");
-            }
-        }
-        return id;
-    }
-
+    /**
+     * Add employee
+     * @param employee - employee object
+     */
     public static void addEmployee(Employee employee) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -92,20 +61,53 @@ public class DaManager {
         }
     }
 
-    
+    /**
+     * Employee verification method. Returns 0 if user and password wasn't found
+     * @param user - employee login
+     * @param password - employee password
+     * @return
+     */
     public static int getEmployeeID(String user, String password) {
-    
-    		int id = verifyEmployee(user, password);
-            
-            if(id == 0) {
-            	System.out.println("User does not exist");
-            	System.exit(-1);
+        Connection connection = null;
+        CallableStatement statement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+
+        try {
+            connection = new DbUtilities().getConnection();
+
+            statement = connection.prepareCall("{? = call P_SECURITY.f_security(?,?)}");
+            statement.registerOutParameter(1, Types.INTEGER);
+            statement.setString(2, user);
+            statement.setString(3, password);
+
+            statement.execute();
+
+            id = statement.getInt(1);
+
+
+        } catch (SQLException ex) {
+            DbUtilities.printSQLException(ex);
+        } catch (Exception ex){
+            System.out.println("DaManager addEmployee ex: " + ex);
+        }
+        finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+                System.out.println("Connection closed");
+            }catch (SQLException ex){
+                System.out.println("Failed to close connection");
             }
-            
-            return id;
+        }
+        return id;
     }
-    
-    
+
+    /**
+     * Get the list of all employees
+     * @return
+     */
     public static ArrayList<Employee> getAllEmployees() {
     
     	Connection connection = null;
@@ -158,9 +160,13 @@ public class DaManager {
         }
         return list;
     }
-    
+
+    /**
+     * Get the list of employees by certain department
+     * @param depid - department id
+     * @return
+     */
     public static ArrayList<Employee> getEmployeesByDepartmentID (int depid) {
-    	
     	Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -210,8 +216,12 @@ public class DaManager {
         }
     	return list;
     }
-    
-    
+
+    /**
+     * Returns employee by employee id
+     * @param employeeId employee id
+     * @return
+     */
     public static Employee getEmployeeById(int employeeId){
         Connection connection = null;
         OracleCallableStatement statement = null;
@@ -261,6 +271,11 @@ public class DaManager {
         return e;
     }
 
+    /**
+     * Updating employee
+     * @param employee employee object
+     * @return
+     */
     public static int updateEmployee(Employee employee){
         Connection connection = null;
         Statement statement = null;
@@ -309,6 +324,11 @@ public class DaManager {
         return 0;
     }
 
+    /**
+     * Delete employee
+     * @param employeeId - employee id
+     * @return
+     */
     public static int deleteEmployeeById(int employeeId){
         Connection connection = null;
         Statement statement = null;
@@ -344,6 +364,11 @@ public class DaManager {
         return 0;
     }
 
+    /**
+     * Batch update. Commit on success, rollback if exception occurred
+     * @param SQLs
+     * @return
+     */
     public static boolean batchUpdate(String [] SQLs) {
         Connection connection = null;
         Statement statement = null;
@@ -355,7 +380,7 @@ public class DaManager {
             connection.setAutoCommit(false);
             
             statement = connection.createStatement();
-            
+
             for(String sql : SQLs) {
             	statement.addBatch(sql);
             }
@@ -367,7 +392,6 @@ public class DaManager {
             }
             
             connection.commit();
-            
 
         } catch (BatchUpdateException ex) {
         	try {
@@ -397,6 +421,4 @@ public class DaManager {
         }
         return false;
     }
-
-    
 }

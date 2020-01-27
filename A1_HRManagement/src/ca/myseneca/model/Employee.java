@@ -2,6 +2,9 @@ package ca.myseneca.model;
 
 import java.sql.Date;
 
+/**
+ * Java beans Employee class. Similar to EMPLOYEE table in database
+ */
 public class Employee implements java.io.Serializable {
     private int employeeId;
     private String firstName;

@@ -7,6 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * DbUtilities provides functionality to read property file,
+ * get connection for database, print sql exception
+ */
 public class DbUtilities {
     private Properties dbProps;
 

@@ -18,7 +18,6 @@ public class HrManagement {
         	String pass = sc.next();
         	
         	System.out.println(DaManager.getEmployeeID(user, pass));
-        	
 
         }
         catch (Exception ex){
