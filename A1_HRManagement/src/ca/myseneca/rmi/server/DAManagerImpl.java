@@ -47,7 +47,7 @@ public class DAManagerImpl extends UnicastRemoteObject implements DAManager {
 	@Override
 	public ArrayList<Employee> getEmployeesByDepartmentID(int depid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return DaManager.getEmployeesByDepartmentID(depid);
 	}
 
 	@Override
