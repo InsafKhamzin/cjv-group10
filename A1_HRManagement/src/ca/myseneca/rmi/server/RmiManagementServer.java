@@ -11,13 +11,15 @@ import java.rmi.registry.LocateRegistry;
  * This is the server class for the RMI application
  *
  */
-public class DAManagerServer {
+public class RmiManagementServer {
 	
-	public DAManagerServer() {
+	public RmiManagementServer() {
 		try {
-			DAManager manager = new DAManagerImpl();
-			LocateRegistry.createRegistry(1099);
-			Naming.rebind("rmi://localhost:1099/DAManagerService", manager);
+			int port = 1099;
+			RmiDaManager manager = new RmiDaManagerImpl();
+			LocateRegistry.createRegistry(port);
+			Naming.rebind("rmi://localhost:"+port+"/DAManagerService", manager);
+			System.out.println("RMI server runs on port " + port);
 		} catch (Exception e) {
 			System.out.println("Something happened... ");
 			e.printStackTrace();
@@ -29,7 +31,7 @@ public class DAManagerServer {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new DAManagerServer();
+		new RmiManagementServer();
 	}
 
 }

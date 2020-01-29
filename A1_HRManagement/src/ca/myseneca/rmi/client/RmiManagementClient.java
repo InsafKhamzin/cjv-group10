@@ -10,14 +10,14 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 import ca.myseneca.model.Employee;
-import ca.myseneca.rmi.server.DAManager;
+import ca.myseneca.rmi.server.RmiDaManager;
 
 /**
  *
  * This is the Client class for testing the RMI application
  *
  */
-public class RMIHRManagement {
+public class RmiManagementClient {
 
 	/**
 	 * @param args
@@ -25,7 +25,7 @@ public class RMIHRManagement {
 	public static void main(String[] args) {
 		Scanner sc = null;
 		try {
-			DAManager manager = (DAManager) Naming.lookup("rmi://localhost:1099/DAManagerService");
+			RmiDaManager manager = (RmiDaManager) Naming.lookup("rmi://localhost:1099/DAManagerService");
         	sc = new Scanner(System.in);
         	System.out.println("Please type user ID:");
         	String user = sc.next();
@@ -121,7 +121,5 @@ public class RMIHRManagement {
         finally {
         	if(sc != null) sc.close();
         }
-
 	}
-
 }

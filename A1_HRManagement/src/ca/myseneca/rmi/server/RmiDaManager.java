@@ -15,7 +15,7 @@ import ca.myseneca.model.Employee;
  * in the data access layer of the application
  *
  */
-public interface DAManager extends Remote {
+public interface RmiDaManager extends Remote {
 
 	/**
      * Add employee

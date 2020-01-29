@@ -7,7 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ojdbc7"/>
-	<classpathentry kind="lib" path="lib/ojdbc7.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc8.jar"/>
 	<classpathentry kind="output" path="out/production/A1_HRManagement"/>
 </classpath>
