@@ -48,6 +48,7 @@ public class RmiManagementClient {
             System.out.println("User info:");
             System.out.println(employee.getInfoString());
 
+            int newEmpId = 121212;
             Employee newEmployee =
                     new Employee(121212, "TestFirstName", "TestLastName",
                             "email@test.com", "534.353.333",
@@ -77,15 +78,6 @@ public class RmiManagementClient {
             }
             System.out.println("Employee " + newEmployee.getEmployeeId() + "  updated. Updated Employee info:");
             System.out.println(newEmployee.getInfoString());
-            System.out.println("------------------------------------------------------------------------");
-
-            System.out.println("Test deleteEmployeeById");
-            boolean deleteResult = manager.deleteEmployeeById(newEmployee.getEmployeeId());
-            if(!deleteResult){
-                System.out.println("Failed to delete Employee");
-                return;
-            }
-            System.out.println("Employee " + newEmployee.getEmployeeId() + " deleted");
 
             System.out.println("------------------------------------------------------------------------");
             System.out.println("Test getAllEmployees");
@@ -113,6 +105,20 @@ public class RmiManagementClient {
             boolean batchResult = manager.batchUpdate(scripts);
             if (!batchResult) {
                 System.out.println("Failed to perform batch update");
+            }
+
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("Test deleteEmployeeById");
+            System.out.println("Input Employee Id:");
+            int deleteEmpId = sc.nextInt();
+            boolean deleteResult = manager.deleteEmployeeById(deleteEmpId);
+            if(!deleteResult){
+                System.out.println("Failed to delete Employee");
+                return;
+            }
+            System.out.println("Employee " + deleteEmpId + " deleted");
+            if(deleteEmpId != newEmpId) {
+                manager.deleteEmployeeById(newEmpId);
             }
         }
         catch (Exception ex){

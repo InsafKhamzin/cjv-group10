@@ -38,8 +38,9 @@ public class HrManagement {
             System.out.println("User info:");
             System.out.println(employee.getInfoString());
 
+            int newEmpId = 121212;
             Employee newEmployee =
-                    new Employee(121212, "TestFirstName", "TestLastName",
+                    new Employee(newEmpId, "TestFirstName", "TestLastName",
                             "email@test.com", "534.353.333",
                             new Date(Calendar.getInstance().getTimeInMillis()), "IT_PROG",
                             200000, 0, 103, 60);
@@ -68,16 +69,6 @@ public class HrManagement {
             System.out.println("Employee " + newEmployee.getEmployeeId() + "  updated. Updated Employee info:");
             System.out.println(newEmployee.getInfoString());
             System.out.println("------------------------------------------------------------------------");
-
-            System.out.println("Test deleteEmployeeById");
-            boolean deleteResult = DaManager.deleteEmployeeById(newEmployee.getEmployeeId());
-            if(!deleteResult){
-                System.out.println("Failed to delete Employee");
-                return;
-            }
-            System.out.println("Employee " + newEmployee.getEmployeeId() + " deleted");
-
-            System.out.println("------------------------------------------------------------------------");
             System.out.println("Test getAllEmployees");
             ArrayList<Employee> allEmployees = DaManager.getAllEmployees();
             for(Employee emp : allEmployees){
@@ -103,6 +94,20 @@ public class HrManagement {
             boolean batchResult = DaManager.batchUpdate(scripts);
             if (!batchResult) {
                 System.out.println("Failed to perform batch update");
+            }
+
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("Test deleteEmployeeById");
+            System.out.println("Input Employee Id:");
+            int deleteEmpId = sc.nextInt();
+            boolean deleteResult = DaManager.deleteEmployeeById(deleteEmpId);
+            if(!deleteResult){
+                System.out.println("Failed to delete Employee");
+                return;
+            }
+            System.out.println("Employee " + deleteEmpId + " deleted");
+            if(deleteEmpId != newEmpId) {
+                DaManager.deleteEmployeeById(newEmpId);
             }
         }
         catch (Exception ex){
