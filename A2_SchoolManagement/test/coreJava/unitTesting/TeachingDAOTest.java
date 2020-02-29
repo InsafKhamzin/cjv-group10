@@ -7,6 +7,7 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import coreJava.customExceptions.StudentRegistrationException;
 import coreJava.dao.TeachingDAO;
@@ -14,6 +15,10 @@ import coreJava.helpers.TestHelper;
 import coreJava.models.Course;
 import coreJava.models.Instructor;
 import coreJava.models.Teaching;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TeachingDAOTest
 {
@@ -24,21 +29,23 @@ public class TeachingDAOTest
     Course cou;
     Instructor ins;
     
-    
+    @Before
     public void testPrep() throws NumberFormatException, IOException {
        
     }
-    
+
+    @Test
     public void assignInstructorToCourse() throws StudentRegistrationException{
         
     }
-    
-    
+
+
+    @Test
     public void getIntructorsCoursesTest() {
        
     }
     
-   
+   @After
     public void cleanUpTestWork() throws ClassNotFoundException, IOException, SQLException {
        
     }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -23,18 +24,19 @@ public class CourseDAOTest
     List<Course> AllCourseList;
     List<Course> coursesByInsList;
     CourseDAO couDAO;
-   
+
+    @Before
     public void testPrep() throws IOException {
         
     }
     
  
-  
+    @Test
     public void getAllCoursesTest() throws ClassNotFoundException, IOException {
         
     }
-    
-    
+
+    @Test
     public void getCourseByInstructorTest() throws ClassNotFoundException, IOException {
        
     }

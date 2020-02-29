@@ -24,12 +24,13 @@ public class InstructorDAOTest
     List<Instructor> allInsList;
     InstructorDAO insDAO;
     
-    
+    @Before
     public void TestPrep() throws NumberFormatException, IOException {
      
     }
-    
-    
+
+
+    @Test
     public void getAllInstructorsTest() throws ClassNotFoundException, IOException {
         
     }

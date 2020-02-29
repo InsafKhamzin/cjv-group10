@@ -13,6 +13,10 @@ import coreJava.dao.AttendingDAO;
 import coreJava.models.Attending;
 import coreJava.models.Course;
 import coreJava.models.Student;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class AttendingDAOTest
 {
@@ -22,22 +26,24 @@ public class AttendingDAOTest
     Integer idToDelete;
     Student stu;
     Course cou;
-    
+
+    @Before
     public void testPrep() throws IOException {
         
     }
     
-    
+
+    @Test
     public void registerStudentToCourseTest() throws StudentRegistrationException{
       
     }
-    
-    
+
+    @Test
     public void getStudentCourseTest() {
       
     }
     
-  
+    @After
     public void cleanUpTestWork() throws ClassNotFoundException, IOException, SQLException {
        
     }

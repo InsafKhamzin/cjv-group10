@@ -20,6 +20,8 @@ public class TestHelper
     }
     
     public static List<Course> coursesHelper(String fileName) throws IOException {
-       
+       List<Course> courses = new ArrayList<>();
+
+       return courses;
     }
 }
