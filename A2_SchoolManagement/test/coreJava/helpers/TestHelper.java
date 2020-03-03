@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coreJava.dao.OracleConnection;
+import coreJava.models.Attending;
 import coreJava.models.Course;
 
 public class TestHelper
@@ -51,7 +52,23 @@ public class TestHelper
     
     public static List<Course> coursesHelper(String fileName) throws IOException {
        List<Course> courses = new ArrayList<>();
-
+       
+       BufferedReader reader = new BufferedReader(new FileReader(fileName));
+       String read = null;
+   	
+       reader.readLine();//to pass first line of column names
+   	
+       while((read = reader.readLine()) != null) {
+    	   Course c = new Course();
+    	   String temp[] = read.split("\\s{2,}");
+		   
+    	   c.setCourse_id(Integer.parseInt(temp[0]));
+		   c.setCourse_name(temp[1]);
+		   c.setMinimun_gpa(Double.parseDouble((temp[2])));
+		   courses.add(c);
+	   }
+       reader.close();
+       
        return courses;
     }
 }
