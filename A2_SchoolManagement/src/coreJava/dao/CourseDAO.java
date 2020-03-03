@@ -69,4 +69,31 @@ public class CourseDAO implements CourseDAOI
         return courseList;
     }
     
+    
+    
+    public Course getCourseById(int id) throws ClassNotFoundException, IOException{
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        Course course = null;
+        OracleConnection Oracle = new OracleConnection();
+        String GETCOURSES = "SELECT * FROM course where course_id = " + id;
+        
+        try {
+            
+            conn = Oracle.getConnection();
+            stmt = conn.prepareStatement(GETCOURSES);
+            result = stmt.executeQuery();
+            
+            if(result.next()) {
+                course = new Course(result.getInt(1), result.getString(2), result.getDouble(3));
+            }
+        }catch(SQLException e) {
+            
+        }finally {
+            
+        }
+        return course;
+    }
+    
 }
