@@ -6,8 +6,31 @@ public class Attending
     private String course_name;
     private String full_name;
     private String email;
-
+    
     /**
+	 * 
+	 */
+	public Attending() {
+		this.attending_id = 0;
+		this.course_name = "";
+		this.full_name = "";
+		this.email = "";
+	}
+
+	/**
+	 * @param attending_id
+	 * @param course_name
+	 * @param full_name
+	 * @param email
+	 */
+	public Attending(int attending_id, String course_name, String full_name, String email) {
+		this.attending_id = attending_id;
+		this.course_name = course_name;
+		this.full_name = full_name;
+		this.email = email;
+	}
+
+	/**
      * @return the attending_id
      */
     public int getAttending_id()

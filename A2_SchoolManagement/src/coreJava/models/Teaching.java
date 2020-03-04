@@ -9,6 +9,30 @@ public class Teaching
     private String email;
     
     /**
+	 * 
+	 */
+	public Teaching() {
+		this.teaching_id = 0;
+		this.course_name = "";
+		this.minimun_gpa = 0.0;
+		this.full_name = "";
+		this.email = "";
+	}
+	/**
+	 * @param teaching_id
+	 * @param course_name
+	 * @param minimun_gpa
+	 * @param full_name
+	 * @param email
+	 */
+	public Teaching(int teaching_id, String course_name, double minimun_gpa, String full_name, String email) {
+		this.teaching_id = teaching_id;
+		this.course_name = course_name;
+		this.minimun_gpa = minimun_gpa;
+		this.full_name = full_name;
+		this.email = email;
+	}
+	/**
      * @return the teaching_id
      */
     public int getTeaching_id()
