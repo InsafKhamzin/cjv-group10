@@ -23,7 +23,9 @@ public class TestHelper
        
     	Connection conn = null;
         Statement stmt = null;
-        String sql = query + " where attending_id = " + idToDelete;
+        String sql = query + idToDelete;
+        
+        
         OracleConnection Oracle = new OracleConnection();
             try
             {

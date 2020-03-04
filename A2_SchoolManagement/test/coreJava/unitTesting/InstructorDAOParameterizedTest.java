@@ -67,7 +67,6 @@ public class InstructorDAOParameterizedTest
         String _designation = instructorDAO.validateUser(instructor, password);
         assertThat(designation, is(_designation));
         
-        /////need to use three different classes from Hamcrest
         
     }
     

@@ -1,7 +1,9 @@
 package coreJava.unitTesting;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,10 +21,11 @@ import coreJava.models.Attending;
 import coreJava.models.Course;
 import coreJava.models.Student;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+
+import static org.hamcrest.Matchers.*;
 
 public class AttendingDAOTest
 {
@@ -32,7 +35,6 @@ public class AttendingDAOTest
     Integer idToDelete;
     Student stu;
     Course cou;
-    static int id;
     
     
     @Before
@@ -66,33 +68,28 @@ public class AttendingDAOTest
     	}
     	    	
     	reader.close();
-
+    	
+    	assertThat(attList.size(), greaterThanOrEqualTo(1));
     }
     
 
     @Test
     @Category({ModifyLevelTests.class})
-    public void registerStudentToCourseTest() throws StudentRegistrationException {
+    public void registerStudentToCourseTest() throws StudentRegistrationException, ClassNotFoundException, IOException {
 
     	StudentDAO stuDAO = new StudentDAO();
-    	try {
     	stu = stuDAO.getStudentByEmail("J@gmail.com");
-    	}catch(Exception e) {
-    		System.out.println("No student with such email");
-    	}
     	
     	CourseDAO couDAO = new CourseDAO();
-    	try {
-    		cou = couDAO.getCourseById(1);
-    	}catch(Exception e) {
-    		System.out.println("No course with that id");
-    	}
+    	cou = couDAO.getCourseById(1);
     	
     	attDAO = new AttendingDAO();
     	
-    	id = attDAO.registerStudentToCourse(stu, cou);
-    		
-    	assert(id > 0);
+    	idToDelete = attDAO.registerStudentToCourse(stu, cou);
+    	
+    	assertThat(idToDelete, greaterThanOrEqualTo(0));
+    	
+    	isDeleting = true;
     }
 
     
@@ -101,7 +98,7 @@ public class AttendingDAOTest
     @Category({SampleDataTests.class})
     public void getStudentCourseTest() {
       
-    	//test that element of attList is present in the Database
+    	//test that elements of attList is present in the Database
     	attDAO = new AttendingDAO();
     	List<Attending> attListFromDB = new ArrayList<>();
     	attListFromDB = attDAO.getStudentCourse(41);
@@ -109,6 +106,7 @@ public class AttendingDAOTest
     	boolean valid = false;
     	
     	for(Attending att : attList) {
+    		valid=false;
     		for(Attending attend : attListFromDB) {
     			if(att.getAttending_id() == attend.getAttending_id()
     					&& att.getCourse_name().equals(attend.getCourse_name())
@@ -124,23 +122,19 @@ public class AttendingDAOTest
     	}
     	
     	
-    	assert(valid==true);
+        assertThat(valid, equalTo(true));
     }
     
     
     @After
     public void cleanUpTestWork() throws ClassNotFoundException, IOException, SQLException {
        
-    	if(id>0) {
-    		TestHelper.deleteRecordHelper("delete from Attending", id);
+    	if(isDeleting) {
+    		TestHelper.deleteRecordHelper("delete from Attending where attending_id = ", idToDelete);
+    		idToDelete = -1;
+    		isDeleting = false;
     	}
+    	
+ 	   assertThat(isDeleting, is(false));
     }
-    
- 
-    public static void main(String[] a) throws Exception {
-    	AttendingDAOTest attTest = new AttendingDAOTest();
-    	attTest.testPrep();
-    	attTest.registerStudentToCourseTest();
-    	attTest.getStudentCourseTest();
-	}
 }
