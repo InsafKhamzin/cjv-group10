@@ -1,0 +1,92 @@
+body{
+	overflow-x: hidden;
+}
+
+.containerBody{
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+.contentBody{
+	margin-left: 20px;
+}
+
+.logoClass{
+	height: 40px;
+	margin-top: -30px;
+	margin-right: 10px;
+}
+
+.title{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.inputRow{
+	margin-bottom: 15px;
+}
+
+.inputFont{
+	font-weight: bold;
+}
+
+.user-info-class{
+	text-align: right;
+    margin-right: 15px;
+}
+
+.logoutClass{
+	height: 15px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+.contentText{
+	margin: 15px 0;
+}
+
+.marginTop10{
+	margin-top: 10px;
+}
+
+.marginBottom10{
+	margin-bottom: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.inputClass{
+	width: 100%;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+.fixedFooter{
+	position: fixed;
+	bottom: 0;
+}
