@@ -13,13 +13,13 @@
 	  	<div class="collapse navbar-collapse" id="navbarNav">
 	    	<ul class="navbar-nav">
 	      		<li class="nav-item active">
-	        		<a class="nav-link" href="/A2_HRManagement/EmployeeList.jsp">Employee List <span class="sr-only">(current)</span></a>
+	        		<a class="nav-link" href="EmployeeList">Employee List <span class="sr-only">(current)</span></a>
 	      		</li>
 		      	<li class="nav-item">
-		        	<a class="nav-link" href="/A2_HRManagement/NewEmployee.jsp">New Employee</a>
+		        	<a class="nav-link" href="EmployeeNew">New Employee</a>
 		      	</li>
 	      		<li class="nav-item">
-	        		<a class="nav-link" href="/A2_HRManagement/SearchEmployee.jsp">Search Employee</a>
+	        		<a class="nav-link" href="EmployeeSearch">Search Employee</a>
 	      		</li>
 	    	</ul>
 	  	</div>
