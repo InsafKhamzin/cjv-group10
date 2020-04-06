@@ -11,17 +11,17 @@
 <link rel="stylesheet" href="styles/main.css" type="text/css" />
 </head>
 <body>
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="user-info-class">
-				<form action="Logout" method="POST">
-					<span>${cookie['username'].getValue()}</span> 
-					<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
-				</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="user-info-class">
+					<form action="Logout" method="POST">
+						<span>${cookie['username'].getValue()}</span> 
+						<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="container">
 		<div class="contentBody">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

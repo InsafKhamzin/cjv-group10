@@ -1,5 +1,15 @@
+html{
+	height: 100%;
+}
+
 body{
 	overflow-x: hidden;
+    height: 100%;
+}
+
+.container{
+	min-height: 100%;
+    position: relative;
 }
 
 .containerBody{
@@ -35,7 +45,6 @@ body{
 
 .user-info-class{
 	text-align: right;
-    margin: 10px 15px 0 0;
 }
 
 .logoutClass{
@@ -56,8 +65,8 @@ body{
 	margin-bottom: 10px;
 }
 
-.marginBottom100{
-	margin-bottom: 100px;
+.marginBottom75{
+	margin-bottom: 75px;
 }
 
 input::-webkit-outer-spin-button,

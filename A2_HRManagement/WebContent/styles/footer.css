@@ -1,9 +1,9 @@
 .page-footer{
 	background-color: black;
     padding: 10px 0;
-    position: fixed;
-    width: 82.3%;
+    width: 97.4%;
     bottom: 0;
+    position: absolute;
 }
 
 .footer-copyright{
