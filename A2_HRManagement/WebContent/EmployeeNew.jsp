@@ -87,7 +87,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="text" id="phNum" name="phNum" maxlength="11" required value="${phNum}">
+							<input class="inputClass" type="text" id="phNum" name="phNum" placeholder="777.777.777" maxlength="11" required value="${phNum}">
 						</div>
 					</div>
 					<div class="row">
@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="number" id="salary" name="salary" required value="${salary}">
+							<input class="inputClass" type="number" step="0.1" id="salary" name="salary" required value="${salary}">
 						</div>
 					</div>
 					<div class="row">
@@ -133,7 +133,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="number" id="commission" name="commission" required value="${commission}">
+							<input class="inputClass" type="number" step="0.01" max="0.99" id="commission" name="commission" required value="${commission}">
 						</div>
 					</div>
 					<div class="row">

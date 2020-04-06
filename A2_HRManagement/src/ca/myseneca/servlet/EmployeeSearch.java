@@ -43,6 +43,12 @@ public class EmployeeSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchValue = request.getParameter("searchValue");
 		
+		if(searchValue.trim().isEmpty()) {
+			request.setAttribute("error", "Input can't be empty");
+			getServletContext().getRequestDispatcher("/EmployeeSearch.jsp").forward(request, response);
+			return;
+		}
+		
 		searchValue = searchValue.replaceAll("[^A-Za-z0-9.]","");
 		
 		ArrayList<Employee> employees = DaManager.searchEmployees(searchValue.toLowerCase());

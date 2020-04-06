@@ -116,6 +116,10 @@ public class EmployeeNew extends HttpServlet {
 					return;
 				}
 			}
+			if(empId == managerId) {
+				sendErrorMessage(request, response, "Employee can't manage him/herself");
+				return;
+			}
 			
 			int deptId = Integer.parseInt(request.getParameter("deptID"));
 			// ********** Validation  **********//

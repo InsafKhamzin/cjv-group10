@@ -45,7 +45,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="text" id="empID" name="empID" disabled readonly="readonly" value="${employee.employeeId}">
+							<input class="inputClass" type="text" id="empID" name="empID" readonly="readonly" value="${employee.employeeId}">
 						</div>
 					</div>
 					<div class="row">
@@ -85,7 +85,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="text" id="phNum" name="phNum" maxlength="11" required value="${employee.phoneNumber}">
+							<input class="inputClass" type="text" id="phNum" name="phNum" placeholder="777.777.777" maxlength="11" required value="${employee.phoneNumber}">
 						</div>
 					</div>
 					<div class="row">
@@ -121,7 +121,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="number" id="salary" name="salary" required value="${employee.salary}">
+							<input class="inputClass" type="number" step="0.1" id="salary" name="salary" required value="${employee.salary}">
 						</div>
 					</div>
 					<div class="row">
@@ -131,7 +131,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="number" id="commission" name="commission" required value="${employee.commissionPercent}">
+							<input class="inputClass" type="number" step="0.01" max="0.99" id="commission" name="commission" required value="${employee.commissionPercent}">
 						</div>
 					</div>
 					<div class="row">

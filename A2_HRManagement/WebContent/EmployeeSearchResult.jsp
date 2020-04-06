@@ -53,7 +53,7 @@
 									<td><c:out value="${e.departmentName}" /></td>
 									<td><c:out value="${e.jobId}" /></td>
 									<td><c:out value="${e.salary}" /></td>
-									<td><c:out value="${e.email}" /></td>
+									<td><a href="mailto:<c:out value="${e.email}"/>"><c:out value="${e.email}"/></a></td>
 									<td><c:out value="${e.phoneNumber}" /></td>
 								</tr>
 						</c:forEach>
