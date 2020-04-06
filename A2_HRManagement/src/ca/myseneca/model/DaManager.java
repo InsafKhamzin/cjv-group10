@@ -557,6 +557,46 @@ public class DaManager {
         return d;
     }
     
+    public static boolean isUserActive(int userId){
+
+    	Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isActive = false;
+        
+        try{
+            connection = pool.getConnection();
+
+            statement = connection.prepareStatement("select * from Security where EMPLOYEE_ID = ?");
+            statement.setInt(1, userId);
+            
+            resultSet = statement.executeQuery();
+            
+            if(resultSet.next()) {
+            	String status = resultSet.getString("SEC_STATUS");  
+            	if(status.equals("A")) {
+            		isActive = true;
+            	}
+            }
+
+        } catch (SQLException ex) {
+            ConnectionPool.printSQLException(ex);
+        } catch (Exception ex){
+            System.out.println("DaManager getDepartmentById ex: " + ex);
+        }
+        finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            }catch (SQLException ex){
+                System.out.println("Failed to close connection");
+            }
+        }
+        
+        return isActive;
+    }
+    
     public static ArrayList<String> getAllJobIds(){
 
     	Connection connection = null;

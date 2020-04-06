@@ -66,6 +66,13 @@ public class Login extends HttpServlet {
 			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			return;
 		}
+		
+		boolean isUserActive = DaManager.isUserActive(userId);
+		if(!isUserActive) {
+			request.setAttribute("error", "User is inactive");
+			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			return;
+		}
 
 		Employee employee = DaManager.getEmployeeById(userId);
 
