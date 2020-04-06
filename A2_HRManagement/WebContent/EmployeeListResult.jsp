@@ -14,9 +14,9 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="user-info-class">
-				<span>${cookie['username'].getValue()}</span> 
 				<form action="Logout" method="POST">
-					<button type="submit"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
+					<span>${cookie['username'].getValue()}</span> 
+					<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
 				</form>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="inputRow marginBottom10">
 					<form action="EmployeeList" method="get">
-						<input class="btn btn-secondary" type="submit" value="Return">
+						<input class="btn btn-outline-dark" type="submit" value="Return">
 					</form>
 				</div>
 			</div>

@@ -46,7 +46,7 @@
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-							<input class="inputClass" type="text" id="password" name="password" value="${password}" required>
+							<input class="inputClass" type="password" id="password" name="password" value="${password}" required>
 						</div>
 					</div>
 					<div class="row">

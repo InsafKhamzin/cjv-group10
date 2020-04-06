@@ -14,9 +14,9 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="user-info-class">
-				<span>${cookie['username'].getValue()}</span> 
 				<form action="Logout" method="POST">
-					<button type="submit"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
+					<span>${cookie['username'].getValue()}</span> 
+					<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
 				</form>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<input class="inputClass" type="text" id="empID" name="empID" readonly="readonly" value="${employee.employeeId}">
+							<input class="inputClass" type="text" id="empID" name="empID" disabled readonly="readonly" value="${employee.employeeId}">
 						</div>
 					</div>
 					<div class="row">
@@ -167,7 +167,7 @@
 							<div class="row">
 								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 									<div class="inputRow marginBottom10">
-										<input type="submit" class="btn btn-primary" value="Update Employee">
+										<input type="submit" class="btn btn-outline-success" value="Update Employee">
 									</div>
 								</div>
 							</div>
@@ -183,7 +183,7 @@
 							<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
 								<div class="inputRow marginBottom10">
 									<input type="hidden" name="empID" value="${employee.employeeId}"> 
-									<input type="submit" class="btn btn-danger" value="Delete Employee">
+									<input type="submit" class="btn btn-outline-danger" value="Delete Employee">
 								</div>
 							</div>
 						</form>
@@ -200,7 +200,7 @@
 			<form action="EmployeeList" method="get">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="inputRow marginBottom10">
-						<input type="submit" class="btn btn-secondary" value="Return">
+						<input type="submit" class="btn btn-outline-dark" value="Return">
 					</div>
 				</div>
 			</form>

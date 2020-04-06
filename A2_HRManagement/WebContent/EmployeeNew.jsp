@@ -15,9 +15,9 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="user-info-class">
-				<span>${cookie['username'].getValue()}</span> 
 				<form action="Logout" method="POST">
-					<button type="submit"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
+					<span>${cookie['username'].getValue()}</span> 
+					<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
 				</form>
 				</div>
 			</div>
@@ -153,28 +153,28 @@
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">										
-						<select class="inputClass" id="deptID" name="deptID">
-							<c:forEach var="d" items="${departments}">
-								<option value="${d.id}" ${deptID == d.id ? 'selected="selected"' : ''}>
-									<c:out value="${d.name}" />
-								</option>
-							</c:forEach>
-						</select>
-					</div>
+							<select class="inputClass" id="deptID" name="deptID">
+								<c:forEach var="d" items="${departments}">
+									<option value="${d.id}" ${deptID == d.id ? 'selected="selected"' : ''}>
+										<c:out value="${d.name}" />
+									</option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 						</div>
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 							<div class="row">
-								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-									<div class="inputRow marginBottom10">
-										<input type="submit" value="Save the New Employee">
+								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+									<div class="inputRow marginBottom100">
+										<input type="submit" class="btn btn-outline-success" value="Save the New Employee">
 									</div>
 								</div>
 								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-									<div class="inputRow marginBottom10">
-										<input type="reset" value="Clear">
+									<div class="inputRow marginBottom100">
+										<input type="reset" class="btn btn-outline-danger" value="Clear">
 									</div>
 								</div>
 							</div>
