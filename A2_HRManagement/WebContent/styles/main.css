@@ -79,8 +79,9 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-input[disabled] {
+input[readonly] {
 	cursor: no-drop;
+	background-color: #6d6d6d45;
 }
 
 .inputClass{

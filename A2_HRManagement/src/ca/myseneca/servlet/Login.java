@@ -1,6 +1,9 @@
 package ca.myseneca.servlet;
 
 import java.io.IOException;
+import java.net.HttpCookie;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -77,9 +80,11 @@ public class Login extends HttpServlet {
 		// setting session to expiry in 5 mins
 		newSession.setMaxInactiveInterval(5*60);
 
-		// settting employee name in cookie
-		Cookie message = new Cookie("username", username);
-		response.addCookie(message);
+		// setting employee name in cookie		
+		Cookie firstName = new Cookie("firstname", employee.getFirstName());
+		Cookie lastName = new Cookie("lastname", employee.getLastName());
+		response.addCookie(firstName);
+		response.addCookie(lastName);
 		response.sendRedirect("EmployeeList.jsp");
 	}
 }

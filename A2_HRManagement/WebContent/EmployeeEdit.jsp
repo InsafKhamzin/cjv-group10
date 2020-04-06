@@ -16,7 +16,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="user-info-class">
 					<form action="Logout" method="POST">
-						<span>${cookie['username'].getValue()}</span> 
+						<span>${cookie['firstname'].getValue()} ${cookie['lastname'].getValue()}</span> 
 						<button type="submit" class="logoutBtn"><img src="images/logout.jpeg" class="logoutClass" alt="logout"></button>
 					</form>
 					</div>
